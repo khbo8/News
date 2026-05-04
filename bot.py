@@ -37,11 +37,13 @@ ISLAMIC_CONTENT = {
 
 current_status = "بدء التشغيل..."
 recent_logs = []
-sent_adhkar_today = "" # لمنع تكرار الذكر في نفس الساعة
+sent_adhkar_today = ""
+
 # ==============================================
 
-# --- واجهة المستخدم (Dark Mode UI) ---
+# --- واجهة المستخدم (Dark Mode UI) مع دعم UptimeRobot ---
 class WebHandler(BaseHTTPRequestHandler):
+    # للرد على الزيارات العادية من المتصفح
     def do_GET(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html; charset=utf-8')
@@ -76,6 +78,12 @@ class WebHandler(BaseHTTPRequestHandler):
         </html>
         """
         self.wfile.write(html_content.encode('utf-8'))
+
+    # للرد على نبضات UptimeRobot (الجديد)
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html; charset=utf-8')
+        self.end_headers()
 
 def add_log(text):
     global current_status
