@@ -67,7 +67,7 @@ def clean_html(raw_html):
     return re.sub(cleanr, '', raw_html).strip()
 
 # --- 4. المحرك الأساسي ---
-first_run = True # متغير لمعرفة إذا كان هذا أول تشغيل للسيرفر
+first_run = False # متغير لمعرفة إذا كان هذا أول تشغيل للسيرفر
 
 def fetch_and_send():
     global first_run
